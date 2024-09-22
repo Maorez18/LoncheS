@@ -1,0 +1,71 @@
+body{
+    background: #f7f7f7;
+}
+
+.form-login{
+    box-shadow: 10px 10px 20px #babecc, -10px -10px 20px #fff;
+}
+
+.btn-form{
+    background: #014034;
+    border: #014034;
+    color: #f7f7f7;
+}
+
+.btn-form:hover{
+    background: #C6D984;
+    border: #C6D984;
+}
+
+.menuDash{
+    background: #125938;
+}
+
+.imagePreview{
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    background-image: url('../img/examplePicture.webp');
+}
+
+.showPhoto{
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+
+.showPhoto>div{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#navbar-lg, #navbar-md {
+    transition: background-color 0.2s ease; /* Ajusta el tiempo y la curva de la animación según tus necesidades */
+}
+
+.bg-trans{
+    background-color: #125938 !important;
+    box-shadow: 0px 2px 20px #0d0d0d;
+}
+
+.btn-loginw{
+    color: #0d0d0d;
+}
+
+.btn-navbar{
+    border: none;
+}
+
+.sub-text{
+    font-size: 0.8em;
+    color: #a0aec0;
+}
+
+.auth-form{
+    background: url('../img/login/double-bubble-outline.webp');
+}

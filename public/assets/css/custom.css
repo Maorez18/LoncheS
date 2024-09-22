@@ -1,0 +1,68 @@
+.custom-carousel-img-lg {
+    height: 500px; /* Puedes ajustar esta altura según tus necesidades */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+}
+
+.custom-carousel-img-md {
+    height: 250px; /* Puedes ajustar esta altura según tus necesidades */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+}
+
+.custom-carousel-img-sm {
+    height: 180px; /* Puedes ajustar esta altura según tus necesidades */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio sin distorsionarse */
+}
+
+.gif-modal{
+    height: 6em;
+    width: 6em;
+}
+
+.card-img-top{
+    height: 200px;
+    object-fit: cover;
+}
+
+@media (max-width: 576px) {
+    .card-img-top{
+        height: 100px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 576px) {
+    .h5-responsive {
+        font-size: 1rem;
+    }
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.category-filter {
+    overflow-x: auto; /* Hacer que el contenedor sea scrollable horizontalmente */
+}
+
+.category-filter .form-check {
+    white-space: nowrap; /* Evitar el salto de línea dentro de los elementos de checkboxes */
+}
+
+.hero1{
+    background: url('../img/pattern1.png');
+    background-color: rgb(61, 55, 50);
+    background-size: contain;
+}
+
+.img-paralela{
+    height: 500px;
+}
+
+@media (max-width: 576px) {
+    .img-paralela{
+        height: 300px;
+    }
+}

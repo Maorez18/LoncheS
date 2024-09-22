@@ -1,0 +1,171 @@
+.profile-header {
+    text-align: center;
+    /* margin-top: 20px; */
+    padding: 20px;
+    border-radius: 0px 0px 15px 15px;
+}
+.profile-header img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.profile-header h2 {
+    margin-top: 10px;
+}
+.profile-header p {
+    color: gray;
+}
+.profile-body {
+    margin-top: 30px;
+}
+.profile-actions {
+    text-align: right;
+    margin-top: 10px;
+}
+.inventory-section, .recipes-section {
+    margin-top: 30px;
+}
+.inventory-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+.inventory-list li {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.card.disabled {
+    position: relative;
+    pointer-events: none; /* Para deshabilitar interacciones */
+    opacity: 0.6; /* Mostrar visualmente como deshabilitado */
+}
+.overlay {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    border-radius: 0.25rem;
+}
+.card.disabled::after {
+    content: "Suscríbete para acceder";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    border-radius: 0.25rem;
+}
+.portfolio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.portfolio-item {
+    width: calc(33.333% - 20px);
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.portfolio-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.portfolio-item h5 {
+    margin: 10px;
+}
+.portfolio-item p {
+    margin: 10px;
+}
+@media (max-width: 768px) {
+    .portfolio-item {
+        width: calc(50% - 20px);
+    }
+}
+@media (max-width: 576px) {
+    .portfolio-item {
+        width: 100%;
+    }
+}
+
+.edit-profile-header {
+    text-align: center;
+    margin-top: 20px;
+}
+.edit-profile-header img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+.edit-profile-header h2 {
+    margin-top: 10px;
+}
+
+.subscription-section {
+    margin-top: 30px;
+}
+
+.food-card {
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.food-card img {
+    border-radius: 10px 10px 0 0;
+    height: 150px;
+    object-fit: cover;
+}
+
+.btn-floating {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.status-indicator {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-fresh {
+    background-color: green;
+}
+
+.status-warning {
+    background-color: orange;
+}
+
+.status-expired {
+    background-color: red;
+}
+
+@media (max-width: 576px) {
+    .food-card img {
+        height: 100px;
+    }
+}
+
+.bg-form-user{
+    background: #f7f7f7;
+    box-shadow: 10px 10px 20px #babecc, -10px -10px 20px #fff;
+}

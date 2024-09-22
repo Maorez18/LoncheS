@@ -1,0 +1,27 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.bg-403 {
+    background: linear-gradient(135deg, #ff5e3a, #ff2a68);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    text-align: center;
+}
+.btn-home {
+    background-color: white;
+    color: #ff2a68;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+.btn-home:hover {
+    background-color: #ff2a68;
+    color: white;
+}
