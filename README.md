@@ -1,66 +1,173 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LoncheS 🍽️
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web para **descubrir, crear y gestionar recetas de cocina a partir de los ingredientes que tienes en casa**. Los usuarios llevan un inventario de su despensa, buscan recetas según los ingredientes disponibles y ven qué porcentaje de cada receta pueden preparar con lo que ya tienen.
 
-## About Laravel
+Desarrollada con **Laravel 11 (PHP 8.2)** bajo el patrón **MVC**, con base de datos **MySQL**, vistas **Blade** y **Bootstrap 5**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Funcionalidades
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Usuarios
+- **Registro con verificación por correo:** al registrarse, el usuario recibe un código de 6 dígitos para activar su cuenta.
+- **Inicio de sesión y recuperación de contraseña** por correo electrónico.
+- **Validación de formularios** en el cliente (JavaScript) y en el servidor (validaciones de Laravel).
+- **Catálogo de recetas** filtrable por categoría, con detalle de ingredientes, cantidades y pasos de preparación.
+- **Búsqueda por ingredientes:** el usuario selecciona lo que tiene y la app le muestra las recetas que puede preparar.
+- **Inventario personal** (despensa): agregar, editar y eliminar ingredientes con su cantidad y unidad de medida.
+- **Porcentaje de disponibilidad:** en cada receta, el usuario suscriptor ve qué porcentaje de los ingredientes ya tiene en su inventario.
+- **Favoritos y comentarios** en las recetas.
+- **Perfil de usuario** editable, con foto.
 
-## Learning Laravel
+### Administrador
+- **Panel de control (dashboard)** con gráficas estadísticas en **Chart.js**: usuarios por tipo, registros en el tiempo y recetas por categoría. Los datos se obtienen de endpoints que responden en **JSON** y se consumen con `fetch`.
+- **CRUD completo** de recetas, ingredientes (incluye información nutricional) y usuarios.
+- Carga de imágenes para recetas, ingredientes y usuarios.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Seguridad y control de acceso
+- Rutas protegidas con el middleware `auth` de Laravel.
+- Middleware propio **`CheckAdmin`** que restringe el panel administrativo a usuarios con rol de administrador.
+- Middleware propio **`NoCacheMiddleware`** que evita que el navegador muestre páginas privadas desde caché después de cerrar sesión.
+- Roles de usuario: **Administrador**, **Normal** y **Suscriptor**.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tecnologías
 
-## Laravel Sponsors
+| Capa | Tecnología |
+|---|---|
+| Backend | PHP 8.2, Laravel 11, Eloquent ORM |
+| Base de datos | MySQL |
+| Frontend | Blade, Bootstrap 5, JavaScript, Chart.js |
+| Correo | Laravel Mail (código de verificación y restablecimiento de contraseña) |
+| Herramientas | Composer, npm, Vite, Git |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Arquitectura
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+El proyecto sigue la estructura estándar de Laravel con el patrón **Modelo–Vista–Controlador**:
 
-## Contributing
+```
+app/
+├── Http/
+│   ├── Controllers/      # 12 controladores (recetas, ingredientes, inventario, usuarios, comentarios…)
+│   │   └── Auth/         # Registro, login, verificación de correo y recuperación de contraseña
+│   └── Middleware/       # CheckAdmin, NoCacheMiddleware
+└── Models/               # 11 modelos Eloquent
+database/
+├── migrations/           # Definición de las tablas y sus relaciones
+└── seeders/              # Datos iniciales (roles, unidades, categorías, ingredientes, recetas, admin)
+resources/views/          # Vistas Blade: auth, admin, crud, recetas, usuario, modales, correos
+routes/web.php            # Rutas públicas, de usuario y de administrador
+public/assets/documents/  # Documentación del proyecto (PDF)
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Modelo de datos
 
-## Code of Conduct
+```mermaid
+erDiagram
+    TYPE_USERS ||--o{ USERS : "rol"
+    USERS ||--o| INVENTORIES : "tiene"
+    INVENTORIES ||--o{ INGREDIENT_INVENTORIES : "contiene"
+    INGREDIENTS ||--o{ INGREDIENT_INVENTORIES : ""
+    CATEGORY_INGREDIENTS ||--o{ INGREDIENTS : "clasifica"
+    UNITS ||--o{ INGREDIENT_INVENTORIES : "mide"
+    UNITS ||--o{ INGREDIENT_RECIPES : "mide"
+    RECIPES ||--o{ INGREDIENT_RECIPES : "lleva"
+    INGREDIENTS ||--o{ INGREDIENT_RECIPES : ""
+    TYPE_RECIPES ||--o{ RECIPES : "categoría"
+    USERS ||--o{ RECIPES : "crea"
+    USERS ||--o{ LUNCHES : "favoritos"
+    RECIPES ||--o{ LUNCHES : ""
+    USERS ||--o{ COMMENTS : "escribe"
+    RECIPES ||--o{ COMMENTS : "recibe"
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Las relaciones muchos a muchos (recetas–ingredientes, inventario–ingredientes, usuarios–recetas favoritas) se manejan con tablas intermedias y `belongsToMany` de Eloquent.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Instalación local
 
-## License
+### Requisitos
+- PHP 8.2 o superior
+- Composer
+- MySQL
+- Node.js y npm
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Pasos
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/Maorez18/LoncheS.git
+cd LoncheS
+
+# 2. Instalar dependencias
+composer install
+npm install
+
+# 3. Configurar el entorno
+cp .env.example .env
+php artisan key:generate
+```
+
+Edita el archivo `.env` con los datos de tu base de datos (por defecto usa una base llamada `lonches`):
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=lonches
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+```bash
+# 4. Crear las tablas
+php artisan migrate
+
+# 5. Cargar los datos iniciales (en este orden)
+php artisan db:seed --class=TypeUserSeeder
+php artisan db:seed --class=AdminSeeder
+php artisan db:seed --class=UnitSeeder
+php artisan db:seed --class=CategoryIngredientSeeder
+php artisan db:seed --class=IngredientsSeeder
+php artisan db:seed --class=TypeRecipeSeeder
+php artisan db:seed --class=RecipeSeeder
+php artisan db:seed --class=IngredientRecipeSeeder
+
+# 6. Compilar recursos y levantar el servidor
+npm run dev
+php artisan serve
+```
+
+La aplicación queda disponible en `http://localhost:8000`.
+
+> **Usuario administrador:** `AdminSeeder` crea una cuenta de administrador inicial. Revisa sus credenciales en `database/seeders/AdminSeeder.php` y cámbialas antes de usar la app fuera de tu entorno local.
+
+> **Correo:** con `MAIL_MAILER=log`, los códigos de verificación y los correos de recuperación se escriben en `storage/logs/laravel.log` en lugar de enviarse. Para enviarlos de verdad, configura un servidor SMTP en `.env`.
+
+> **Carga de imágenes:** las rutas de carga apuntan a `public_html/uploads`, la carpeta del hosting donde se desplegó el proyecto. Para trabajar en local, usa la línea comentada `public_path('uploads/...')` en los controladores.
+
+---
+
+## Documentación
+
+El proyecto incluye documentación formal en [`public/assets/documents`](public/assets/documents):
+
+- [Manual técnico](<public/assets/documents/Manual técnico de LoncheS.pdf>)
+- [Manual de usuario](<public/assets/documents/Manual de usuario de LoncheS.pdf>)
+- [Diccionario de datos](public/assets/documents/DiccionarioDatos.pdf)
+- [Informe del proyecto](public/assets/documents/InformeLoncheS.pdf)
+- [Política de seguridad](<public/assets/documents/Política de seguridad.pdf>)
+
+---
+
+## Autor
+
+**Victor Mauricio Pérez Castillo**
+Ingeniero de Sistemas · Desarrollador de Software
+
+- LinkedIn: [victor-mauricio-perez-castillo](https://www.linkedin.com/in/victor-mauricio-perez-castillo-3512a22b3)
+- Correo: victorperezc18@gmail.com
